@@ -134,3 +134,4 @@ setTimeout(function() {
 setTimeout(() => {
     console.log('Eating!');
 }, 3000);
+//each of these are valid timer callbacks, which fire based on milliseconds defined in each.
