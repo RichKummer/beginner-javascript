@@ -1,44 +1,36 @@
-// Make a div
+const div = document.createElement('div');
+div.classList.add('wrapper');
+document.body.appendChild(div);
 
-// add a class of wrapper to it
+const ul = document.createElement('ul');
 
-// put it into the body
+const item1 = document.createElement('li');
+item1.textContent = 'One';
+ul.appendChild(item1);
 
-// make an unordered list
+const item2 = document.createElement('li');
+item2.textContent = 'Two';
+ul.appendChild(item2);
 
-// add three list items with the words "one, two, three" in them
-// put that list into the above wrapper
+const item3 = document.createElement('li');
+item3.textContent = 'Three';
+ul.appendChild(item3);
 
-// create an image
+div.insertAdjacentElement('afterbegin', ul);
 
-// set the source to an image
-// set the width to 250
-// add a class of cute
-// add an alt of Cute Puppy
-// Append that image to the wrapper
+const img = document.createElement('img');
 
-// with HTML string, make a div, with two paragraphs inside of it
-// put this div before the unordered list from above
+img.alt = 'Cute Puppy';
+img.width = `250`;
+img.classList.add('cute');
+img.src = `https://source.unsplash.com/random/300x300`;
 
-// add a class to the second paragraph called warning
-// remove the first paragraph
+const myHTML = `
+    <div class = "wrapper">
+        <p class="p1">Sample paragraph 1</p>
+        <p>Sample paragraph 2</p>
+    </div>
+`;
 
-// create a function called generatePlayerCard that takes in three arguments: name, age, and height
-
-// have that function return html that looks like this:
-// <div class="playerCard">
-//   <h2>NAME — AGE</h2>
-//   <p>They are HEIGHT and AGE years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
-// </div>
-
-// make a new div with a class of cards
-
-// make 4 player cards using generatePlayerCard
-
-// append those cards to the div
-// put the div into the DOM just before the wrapper element
-// Bonus, put a delete Button on each card so when you click it, the whole card is removed
-
-// select all the buttons!
-// make out delete function
-// loop over them and attach a listener
+div.insertAdjacentElement('beforebegin', myHTML);
+p1.remove();
