@@ -24,13 +24,51 @@ img.alt = 'Cute Puppy';
 img.width = `250`;
 img.classList.add('cute');
 img.src = `https://source.unsplash.com/random/300x300`;
+img.classList.add('cute');
+div.appendChild(img);
+
 
 const myHTML = `
-    <div class = "wrapper">
+    <div class="myDiv">
         <p class="p1">Sample paragraph 1</p>
         <p>Sample paragraph 2</p>
     </div>
 `;
+const ulElement = div.querySelector('ul');
+console.log(ulElement);
+ulElement.insertAdjacentHTML('beforebegin', myHTML);
+const myDiv = div.querySelector('.myDiv');
+myDiv.children[1].classList.add('warning');
+myDiv.firstElementChild.remove();
 
-div.insertAdjacentElement('beforebegin', myHTML);
-p1.remove();
+const myFragment = document.createRange().createContextualFragment(myHTML);
+document.body.appendChild(myFragment);
+
+function generatePlayerCard(name, age, height) {
+    const html = `
+        <div class="playerCard">
+            <h2>${name} - ${age}</h2>
+            <p>Their height is ${height} and ${age} years old. In Dog years this person would be ${age * 7}. That would be a tall dog!</p>
+            <button class="delete" type="button">&times; Delete</button>
+        </div>
+        `
+    return html;
+}
+
+const cards = document.createElement('div');
+cards.classList.add('cards');
+let cardsHTML = generatePlayerCard('rich', 32, 6);
+cardsHTML += generatePlayerCard('michael', 36, 7);
+cardsHTML += generatePlayerCard('tim', 34, 9);
+cardsHTML += generatePlayerCard('mike', 33, 6);
+cards.innerHTML = cardsHTML;
+div.insertAdjacentElement('beforebegin', cards);
+
+const buttons = document.querySelectorAll('.delete');
+
+function deleteCard(event) {
+    const buttonThatGotClicked = event.currentTarget;
+    buttonThatGotClicked.parentElement.remove();
+}
+
+buttons.forEach(button => button.addEventListener('click', deleteCard));
