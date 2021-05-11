@@ -91,6 +91,75 @@
     });
     console.groupEnd();
 
+    console.clear();
+
+    const isCool = true;
+
+    if(!isCool) {
+      console.log('You are not cool');
+    }
+
+    //Ternary
+    
+    const count = 1234;
+    /*
+    let word;
+    if(count === 1) {
+      word = 'item';
+    } else {
+      word = 'items';
+    }
+    */
+
+    //turn the above into a ternary
+    // 1. Condition, 2. What to do if true, 3. What to do if false
+    const word = count === 1 ? 'item' : 'items';
+    const sentence = `You have ${count} ${word} in your cart`;
+    console.log(sentence);
+
+    //Can also make it add 's' or not
+    /*
+    const word = count === 1 ? 'item' : 'items';
+    const sentence = `You have ${count} item${count === 1 ? '' : 's'} in your cart`;
+    console.log(sentence);
+    */
+
+    function showAdminBar() {
+      console.log('Showing admin bar');
+    }
+    const isAdmin = true;
+    //checks if true - run function, if not do nothing
+    /*
+    isAdmin ? showAdminBar() : null;
+    */
+
+    // AND AND TRICK
+    function check1() {
+      console.log('Running check 1');
+      return true;
+    }
+    function check2() {
+      console.log('Running check 2');
+      return true;
+    }
+    function check3() {
+      console.log('Running check 3');
+      return false;
+    }
+
+    //If you run a condition, will first check condition one after the other. If at any point one of these are false, JS will give up.
+    if(check1() && check2() && check3()) {
+      console.log('All checks cleared')
+    } else {
+      console.log('Some checks failed');
+    }
+
+    // isAdmin ? showAdminBar() : null;
+    //The below abuses the condition chaining
+    isAdmin && showAdminBar();
+    
+    //If it can go onto one line, you do not need brackets.
+    if(isAdmin) showAdminBar();
 
   </script>
 </body>
