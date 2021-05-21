@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <input type="test" name="first" value="wes">
+  <script>
+    const age = 100;
+    const wes = {
+      name: 'wes',
+      age: age,
+      propertyToCheck: 'Never',
+      'cool-dude': true,
+      'really cool': false,
+      '777': true,
+      clothing: {
+        shirts: 10,
+        pants: 2
+      }, //nested object
+      SayHello(greeting = 'Hey') {
+        return `${greeting} ${this.name}`
+      } //'this' keyword always equals what's left of the dot (in this case, 'wes')
+    };
+
+    wes.job = 'Wed dev'; //adds prop
+    wes.age = 50; //overwrites prop
+
+    console.log(wes.age);
+    
+    // Using brackets for property lookup
+    //const propertyToCheck = prompt('What do you want to check?');
+    //console.log(wes[propertyToCheck]);
+
+    const nameInput = document.querySelector('[name="first"]');
+    const name = nameInput ? nameInput.value : '';
+    console.log(name);
+
+    console.log(delete wes.job);
+    wes.age = undefined;
+    wes.age = null;
+
+    // Methods - a function that lives inside an object
+
+
+  </script>
+</body>
+
+</html>
