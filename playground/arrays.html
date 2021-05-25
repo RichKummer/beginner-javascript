@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>
+
+  </title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    // Create the array
+    const names = ['wes', 'kait', 'snickers'];
+    console.log(names[0]); //calls wes
+    console.log(names.length); //see how many entries
+    console.log(names[names.length - 1]); //get last index item
+
+    // Add items to end of array - push
+    names.push('lux');
+    console.log(names);
+    const names2 = [...names, 'lux']; //immutable way
+
+    // Add items to first of array - unshift
+    names.unshift('poppy');
+    console.log(names);
+    const names3 = ['poppy', ...names]; //immutable way
+    console.log(names3);
+
+    // Slice - Take portion of original array (immutable). You probably want to use slice over splice
+    const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+    const newBikes = [
+      ...bikes.slice(0,2),
+      'benotto',
+      ...bikes.slice(2)
+    ];
+
+    const newBikes2 = [
+      ...bikes.slice(0, 3),
+      ...newBikes.slice(4)
+
+    ];
+    console.log(newBikes2);
+
+    const comments = [
+      { text: 'Cool beans', id: 123 },
+      { text: 'Hey sexy', id: 133 },
+      { text: 'Who is the author?', id: 233 },
+      { text: 'Where again?', id: 333 },
+      { text: 'Hi!', id: 433 },
+    ];
+
+    //Deleting a comment from the above array
+    function deleteComment(id, comments) {
+      //first find the index of the item in the array
+      const commentIndex = comments.findIndex(comment => comment.id === id);
+      //make a new array without that item in it
+      return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1)
+      ];
+      //return our new array
+    }
+
+    const kaitIndex = names.findIndex(name => name === 'kait');
+    const newNamesWithoutKait = [
+      //get everything up to kait index
+      ...names.slice(0, kaitIndex),
+      //everything after kait index
+      ...names.slice(kaitIndex + 1)
+    ].flat();
+
+    console.log(newNamesWithoutKait);
+    
+    // Splice - Take portion of original array (mutable)
+    // const numbers = [1,2,3,4,5,6,7,8,9];
+    // numbers.splice(3, 2);
+    // console.log(numbers);
+
+    // // Mutation method - they DO change original data
+    // const numbers = [1,2,3,4,5,6,7,8,9];
+    // numbers.reverse();
+    // console.log(numbers); //original array has been reversed/changed
+
+    // //When you want to use a mutation method and NOT mutate the original array - you need to take a copy of the array
+    // const numbersReversed = [...numbers];
+    // numbersReversed.reverse();
+    // console.log(numbersReversed);
+    
+
+    // // Immutable method - they DO NOT change the original data
+    // const pizzaSlice = numbers.slice(2,4); //take a portion of the array and make it into a new array
+    // console.log(pizzaSlice);
+    // console.log(numbers);
+
+
+  </script>
+
+</body>
+
+</html>
