@@ -128,6 +128,27 @@
     /*
       Looping Methods
     */
+   function logTopping(topping, index, originalArray) {
+    const prevTopping = originalArray[index - 1];
+    const nextTopping = originalArray[index + 1];
+     //log the topping
+     console.log(topping);
+
+     //log previous topping, if one
+     prevTopping ? console.log(prevTopping) : null;
+
+     //log next topping, if one
+     nextTopping ? console.log(nextTopping) : null;
+
+
+     //if last in array, say 'goodbye'
+     index === originalArray.length - 1 ? console.log('goodbye!') : console.log('Getting next topping');
+     console.log('-----------');
+   }
+
+   toppings.forEach(logTopping);
+
+   
 
   </script>
 </body>
