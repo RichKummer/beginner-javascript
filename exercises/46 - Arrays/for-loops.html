@@ -12,15 +12,78 @@
   <script>
     const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
 
-    const name = 'Wes Bos';
+    const name = 'Rich Kummer 👻';
+
+    const rich = {
+      name: 'Rich',
+      age: 999,
+      cool: true,
+    };
 
     // For
+    // for (let i = 0; i <= 10; i++) {
+    //   console.log(i);
+    // }
 
-    // For of
+    // for (let i = 0; i < numbers.length; i++) {
+    //   console.log(numbers[i]);
+    // }
 
-    // For in
+    // For of - handy for sequencing promises. Also just gives raw value when looping through an array
+    for (const letter of name) {
+      console.log(letter);
+    }
 
-    // While Loop
+    for (const number of numbers) {
+      console.log(number);
+    }
+
+    // For in - used for looping over keys of an object
+    for (const number in numbers) {
+      console.log(number);
+    }
+
+    for (const prop in rich) {
+      console.log(prop);
+    }
+
+    const baseHumanStats = {
+      feet: 2,
+      arms: 2,
+      eyes: 2,
+      head: 1,
+    };
+
+    function Human(name) {
+      this.name = name;
+    }
+
+    // For a prototype, will look to prototype to see if it has the value & pull from there
+    Human.prototype = baseHumanStats;
+
+    const rich2 = new Human('Rich');
+
+    console.log(Object.keys(rich2));
+
+    for(const prop in rich2) {
+      console.log(prop);
+    };
+
+    // While Loop - takes a condition and runs infinitely until the condition is false
+    let cool = true;
+    let i = 0;
+
+    while (cool === true) {
+      console.log('You are cool');
+      i++
+      if (i > 100) {
+        cool = false;
+      }
+    };
+
+
+    // Do While Loop - will do the thing AND THEN check. While loops always check the condition first
+
   </script>
 </body>
 
