@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>
+    New, This, Prototypes, and Classes
+  </title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <button class="one"></button>
+  <button class="two"></button>
+  <script> 
+    // when you create anything, it's a new object that is extended off the constructor
+    // Arrays, Objects, Dates, Numbers are just functions that return objects
+    // Everything in JS is an Object, which are packed with methods that can be run on it
+    const myDate = new Date('August 11, 2024');
+    console.dir(myDate);
+    console.log(myDate.getFullYear());
+
+    const names = ['wes', 'rich'];
+    // above is the same as new Array = ['wes', 'rich'];
+    const wes = { name: 'wes' }
+     // above is the same as new Object = ({ name: 'wes' });
+
+     // under the hood, this is has "new" in the constructor
+     const span = document.createElement('span');
+     console.log(span);
+
+     function Pizza(toppings = [], customer) {
+      console.log('Making a pizza');
+      // save the toppings passed in
+      this.toppings = toppings;
+      this.customer = customer;
+      this.id = Math.floor(Math.random() * 16777215).toString(16);
+     }
+
+     // when using new on a function, it creates a new instance of that function
+     const pepperoniPizza = new Pizza(['pepperoni'], 'Kathy');
+     const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Charles');
+
+    // const button1 = document.querySelector('.one');
+    // const button2 = document.querySelector('.two');
+
+
+    //  // May be tricky with arrow functions
+    //  function tellMeAboutTheButton() {
+    //   console.log('outside', this);
+    //   setTimeout(() => {
+    //     console.log('inside', this)
+    //     this.textContent = 'You clicked me!'
+    //   }, 1000);
+    //  }
+
+    //  // "this" used above equals the thing that is left of the dot
+    //  // this keyword is always scoped to a function
+    //  button1.addEventListener('click', tellMeAboutTheButton);
+    //  button2.addEventListener('click', tellMeAboutTheButton);
+
+  </script>
+ 
+</body>
+
+</html>
