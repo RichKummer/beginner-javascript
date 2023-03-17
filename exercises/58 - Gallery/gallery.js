@@ -24,35 +24,35 @@ function Gallery(gallery) {
     prevButton.addEventListener('click', showPrevImage);
   }
 
-  function closeModal() {
+  Gallery.prototype.closeModal = function() {
     modal.classList.remove('open');
     //to do: add event listeners for clicks and keyboard!
-    window.removeEventListener('keyup', handleKeyUp);
-    nextButton.removeEventListener('click', showNextImage);
-    prevButton.removeEventListener('click', showPrevImage);
+    window.removeEventListener('keyup', this.handleKeyUp);
+    nextButton.removeEventListener('click', this.showNextImage);
+    prevButton.removeEventListener('click', this.showPrevImage);
   }
 
-  function handleClickOutside(e) {
+  Gallery.prototype.handleClickOutside = function(e) {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   }
 
-  function handleKeyUp(event) {
-    if (event.key === 'Escape') return closeModal();
-    if (event.key === 'ArrowRight') return showNextImage();
-    if (event.key === 'ArrowLeft') return showPrevImage();
+  Gallery.prototype.handleKeyUp = function(event) {
+    if (event.key === 'Escape') return this.closeModal();
+    if (event.key === 'ArrowRight') return this.showNextImage();
+    if (event.key === 'ArrowLeft') return this.showPrevImage();
   }
 
-  function showNextImage() {
-    showImage(currentImage.nextElementSibling || gallery.firstElementChild);
+ Gallery.prototype.showNextImage = function() {
+    this.showImage(this.currentImage.nextElementSibling || gallery.firstElementChild);
   }
 
-  function showPrevImage() {
-    showImage(currentImage.previousElementSibling || gallery.lastElementChild);
+  Gallery.prototype.showPrevImage = function() {
+    this.showImage(this.currentImage.previousElementSibling || gallery.lastElementChild);
   }
 
-  function showImage(el)  {
+  Gallery.prototype.showImage = function(el) {
     if (!el) {
       console.info('no image to show');
       return;
@@ -63,12 +63,12 @@ function Gallery(gallery) {
     modal.querySelector('h2').textContent = el.title;
     modal.querySelector('figure p').textContent = el.dataset.description;
     currentImage = el;
-    openModal();
+    this.openModal();
   }
 
   // Event listenders
 
-  images.forEach(image => 
+  images.forEach(this.image => 
     image.addEventListener('click', e => showImage
     (e.currentTarget))
   );
