@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <script>
+        // Promises represents data you might get in the future, for example a user's webcam.
+        // Need to wait for something to happen first.
+
+        function makePizza(toppings = []) {
+            return new Promise(function(resolve, reject) {
+
+                const amountOfTimeToBake = 500 + (toppings.length * 200)
+
+                // wait one second for pizza to cook
+                setTimeout(function() {
+                    // when you are ready, you can resolve this promise
+                    resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
+                }, amountOfTimeToBake);
+
+                // if something went wrong, we can reject it
+
+            });
+        }
+
+        // This is sequential, they happen one at a time
+        // makePizza(['pepperoni']).then(function (pizza) {
+        //     console.log(pizza);
+        //     return makePizza(['ham', 'cheese']);
+        // }).then(function(pizza) {
+        //     console.log(pizza);
+        //     return makePizza(['hot peppers', 'onion', 'feta']);
+        // }).then(function(pizza) {
+        //     console.log(pizza);
+        //     return makePizza();
+        // }).then(function(pizza) {
+        //     console.log(pizza);
+        //     return makePizza(['one', 'two', 'three', 'four', 'five', 'one', 'two', 'three', 'four', 'five']);
+        // }).then(pizza => {
+        //     console.log('All done! here is your last pizza');
+        //     console.log(pizza);
+        // });
+
+        // Run them concurrently
+        const pizzaPromise1 = makePizza(['hot peppers', 'onion', 'feta']);
+        const pizzaPromise2 = makePizza(['one', 'two', 'three', 'four', 'five', 'one', 'two', 'three', 'four', 'five']);
+        const pizzaPromise3 = makePizza(['ham', 'cheese']);
+
+        // Create mega promise that runs when all three pizzas are done
+        // Promise.all is a static method that takes in promises
+        const dinnerPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+
+        dinnerPromise.then(function([hottie, garbagePail, hamAndCheese]) {
+
+            console.log(hottie, garbagePail, hamAndCheese);
+        });
+
+        const firstPizzaPromise = Promise.race([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+
+        firstPizzaPromise.then(pizza => {
+            console.log('You must be hungry! Here is the first one ready: ')
+            console.log(pizza);
+        })
+
+        // pepperoniPromise.then(function(pizza) {
+        //     console.log('Ahh, got it!');
+        //     console.log(pizza);
+        // });
+
+    </script>
+
+</body>
+</html>
