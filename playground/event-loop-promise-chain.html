@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Loop – Promise chain refactor</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <style>
+        .go {
+            margin: 5rem;
+            background: purple;
+            padding: 10rem;
+            color: white;
+            height: 5rem;
+            transition: all 0.2s;
+        }
+        .go.circle {
+            border-radius: 50%;
+        }
+        .go.red {
+            background: red;
+        }
+        .go.blue {
+            background: blue;
+        }
+        .go.faded {
+            opacity: 0;
+        }
+    </style>
+
+    <div class="go">Click me!</div>
+    <script>
+
+        // New wait function to handle promises
+        const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
+
+        wait(2000).then(() => {
+            console.log('Done!');
+        })
+
+        // // JS is single threaded, so the call stack can only ever run one thing at a time.
+        // console.log('Starting');
+        // setTimeout(function() {
+        //     // Because this has a defined wait time, it will run after the next 'Ending'
+        //     console.log('Running');
+        // }, 2000);
+        // console.log('Ending');
+
+        const go = document.querySelector('.go');
+
+        function animate(e) {
+            const el = e.currentTarget;
+            el.textContent = 'Go!';
+            wait(200).then(() => {
+                el.classList.add('circle');
+                return wait(500);
+                })
+                .then(() => {
+                    el.classList.add('red');
+                    return wait(250)
+                })
+                .then(() => {
+                    el.classList.remove('circle');
+                    return wait(250)
+                })
+                .then(() => {
+                    el.classList.remove('red');
+                    el.classList.add('purple');
+                    return wait(250)
+                })
+                .then(() => {
+                    el.classList.add('faded');
+                    return wait(250)
+                })
+        }
+        go.addEventListener('click', animate)
+
+        go.addEventListener('clickXXXXX', function(e) {
+            const el = e.currentTarget;
+            el.textContent = 'Go!';
+            setTimeout(function() {
+                el.classList.add('circle');
+                setTimeout(function() {
+                    el.classList.add('red');
+                    setTimeout(function() {
+                        el.classList.remove('circle');
+                            setTimeout(function() {
+                                el.classList.add('blue');
+                                setTimeout(function() {
+                                    el.classList.add('faded');
+                                }, 500);
+                            }, 333);
+                    }, 250);
+                }, 500);
+            }, 2000);
+
+        })
+
+    </script>
+</body>
+</html>
