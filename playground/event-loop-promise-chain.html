@@ -51,6 +51,25 @@
 
         const go = document.querySelector('.go');
 
+
+        // much cleaner await/async version.
+        async function animate2(e) {
+            const el = e.currentTarget;
+            el.textContent = 'Go!';
+            await wait(200);
+            el.classList.add('circle');
+            await wait(500);
+            el.classList.add('red');
+            await wait(250)
+            el.classList.remove('circle');
+            await wait(250)
+            el.classList.remove('red');
+            el.classList.add('purple');
+            await wait(250)
+            el.classList.add('faded');
+            await wait(250)
+        }
+
         function animate(e) {
             const el = e.currentTarget;
             el.textContent = 'Go!';
@@ -76,7 +95,8 @@
                     return wait(250)
                 })
         }
-        go.addEventListener('click', animate)
+
+        go.addEventListener('click', animate2)
 
         go.addEventListener('clickXXXXX', function(e) {
             const el = e.currentTarget;
