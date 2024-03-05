@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async and Await</title>
+</head>
+<body>
+    <script>
+        function wait(ms = 0) {
+            return new Promise((resolve) => {
+                setTimeout(resolve, ms);
+            })
+        }
+
+
+        function makePizza(toppings = []) {
+            return new Promise(function(resolve, reject) {
+                // check if someone put pineapple on, then reject
+                if(toppings.includes('pineapple')) {
+                    reject('Seriously? Get out');
+                }
+
+                const amountOfTimeToBake = 500 + (toppings.length * 200)
+
+                // wait one second for pizza to cook
+                setTimeout(function() {
+                    // when you are ready, you can resolve this promise
+                    resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
+                }, amountOfTimeToBake);
+
+                // if something went wrong, we can reject it
+
+            });
+        }
+
+        // We need to figure out to handle errors with async/await
+
+        // Solution 01: use 'try' and 'catch' in the function. Downside is that it messes up how good async/await looks. You have to wrap it with try/catch
+        // async function go() {
+        //     try {
+        //         const pizza = await makePizza(['pineapple']);
+        //         console.log(pizza);
+        //     } catch(err) {
+        //         console.log('Oh no!');
+        //         console.log(err);
+        //     }
+        // }
+
+        // Solution 02: use async/await but use promise syntax for error handling. The one Wes uses most often
+        // When you make a function as async, that function will return a promise
+        // function handleError(err) {
+        //     console.log('oh no!');
+        //     console.log(err);
+        // }
+        // async function go() {
+        //     const pizza = await makePizza(['pineapple']);
+        //     console.log(pizza);
+        //     return pizza;
+        // }
+
+        // go().catch(handleError);
+
+        // Solution 03: using a higher order function
+        function handleError(err) {
+            console.log('oh no!');
+            console.log(err);
+        }
+        async function go() {
+            const pizza = await makePizza(['pineapple']);
+            console.log(pizza);
+            return pizza;
+        }
+
+        // catch it at run time
+        go().catch(handleError);
+
+        // or, make a safe function with a High order function
+        function makeSafe(fn, errorhHandler) {
+            return function() {
+                fn().catch(handleError)
+            }
+        }
+
+        // takes function and returns safe version. More often than not, you have a function that is reused, and this saves you writing the same 'safe' function each time.
+        const safeGo = makeSafe(go, handleError);
+
+        safeGo();
+
+    </script>
+
+</body>
+</html>
