@@ -1,0 +1,26 @@
+{
+  "name": "npmmodules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "await-to-js": "^3.0.0",
+    "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
+    "faker": "^6.6.6",
+    "lodash": "^4.17.21",
+    "waait": "^1.0.5"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
+}
